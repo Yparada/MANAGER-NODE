@@ -32,8 +32,18 @@ const createUser = async (req, res) => {
     });
 }
 
+const deleteUser = async (req, res) => {
+    const id = req.params.id;
+    const { name, email } = req.body;
+    const response = await pool.query('delete from users where id = $1', [id]);
+    res.json({
+        message: `User ${id} deleted successfully`
+    });
+}
+
 module.exports = {
     getUsers,
     createUser,
-    getUserById
+    getUserById,
+    deleteUser
 }
